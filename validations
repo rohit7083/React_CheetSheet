@@ -4,3 +4,54 @@ onChange={(e) => {
   onChange(value);
 }}
 
+
+// App.js
+
+import React from "react";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function App() {
+  const notifySuccess = () => {
+    toast.success("✅ Login Successful!");
+  };
+
+  const notifyError = () => {
+    toast.error("❌ Something went wrong!");
+  };
+
+  const notifyInfo = () => {
+    toast.info("ℹ️ This is an info message.");
+  };
+
+  const notifyWarning = () => {
+    toast.warn("⚠️ This is a warning message.");
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>React Toastify Example</h2>
+
+      <button onClick={notifySuccess}>Show Success</button>
+      <button onClick={notifyError}>Show Error</button>
+      <button onClick={notifyInfo}>Show Info</button>
+      <button onClick={notifyWarning}>Show Warning</button>
+
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
+    </div>
+  );
+}
+
+export default App;
