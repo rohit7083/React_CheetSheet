@@ -1,0 +1,6 @@
+🔤 1. Only Alphabets
+onChange={(e) => {
+  const value = e.target.value.replace(/[^a-zA-Z]/g, "");
+  onChange(value);
+}}
+
