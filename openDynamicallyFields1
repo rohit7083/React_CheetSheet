@@ -1,0 +1,137 @@
+
+import React, { useState } from "react";
+
+import { Plus, PlusCircle, Trash2 } from "react-feather";
+import {
+  Card,
+  Form,
+  Table,
+  CardHeader,
+  CardTitle,
+  Button,
+  Input,
+} from "reactstrap";
+import { useForm, Controller } from "react-hook-form";
+
+const Add_Specification = () => {
+  const [specifications, setSpecification] = useState([]);
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    register,
+
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+  });
+
+  const handleAdd = () => {
+    setSpecification([...specifications, { name: "", value: "" }]);
+  };
+
+  const remove = (index) => {
+    // {{debugger}}
+    const newSpecification = specifications.filter((_, i) => i !== index);
+    setSpecification(newSpecification);
+  };
+
+  const onSubmit = (data) => {};
+  return (
+    <>
+      <CardHeader className="flex-md-row flex-column align-md-items-center align-items-start ">
+        <CardTitle className="mt-3 mb-2" tag="h4">
+          Specifications
+        </CardTitle>
+        <CardTitle
+          className="mt-3 mb-2"
+          style={{ cursor: "pointer", color: "#607dd2" }}
+          tag="h4"
+          onClick={handleAdd}
+        >
+          <Plus /> Add Specifications
+        </CardTitle>
+      </CardHeader>
+
+      <Card className="card-company-table px-1">
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>Specification Name</th>
+                <th>Value</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {specifications.map((specification, index) => (
+                <tr key={index}>
+                  <td>
+                    <Controller
+                      control={control}
+                      name="name"
+                      rules={{
+                        required: "Variations Name is required",
+                        pattern: {
+                          value: /^[A-Za-z ]+$/,
+                          message:
+                            "Only alphabetic characters (A–Z) are allowed",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          type="text"
+                          placeholder="Variation Name"
+                          {...field}
+                        />
+                      )}
+                    />
+                  </td>
+                  <td>
+                    <Controller
+                      control={control}
+                      name="name"
+                      rules={{
+                        required: "Variations Name is required",
+                        pattern: {
+                          value: /^[A-Za-z ]+$/,
+                          message:
+                            "Only alphabetic characters (A–Z) are allowed",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <Input
+                          type="text"
+                          placeholder="Variation Name"
+                          {...field}
+                        />
+                      )}
+                    />
+                  </td>
+
+                  <td>
+                    <Trash2
+                      style={{ cursor: "pointer" }}
+                      onClick={() => remove(index)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
+          <div className="d-flex justify-content-start ms-2 mt-2 mb-1">
+            <Button color="primary" onClick={handleAdd} type="button">
+              <PlusCircle />
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </>
+  );
+};
+
+export default Add_Specification;
+
